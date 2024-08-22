@@ -8,6 +8,6 @@ router.get('/', getAllProducts);
 router.get('/type/:type', getProductsByType);
 router.post('/', upload.array('images', 5),authenticateJWT,authorizeAdmin, addProduct); // استخدام Multer لرفع الصور عند إضافة منتج
 router.put('/:id', upload.array('images', 5),authenticateJWT,authorizeAdmin, updateProduct); // استخدام Multer لتحديث الصور عند تعديل المنتج
-router.delete('/:id',authenticateJWT,authorizeAdmin, deleteProduct); // حذف منتج
+router.delete('/:id', deleteProduct); // حذف منتج
 
 module.exports = router;

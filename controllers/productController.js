@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const getAllProducts = (req, res) => {
-  db.query('SELECT * FROM products', (err, results) => {
+  db.query('SELECT * FROM products where isDeleted = 0 ', (err, results) => {
     if (err) throw err;
     res.json(results);
   });
@@ -67,7 +67,7 @@ const updateProduct = (req, res) => {
 const deleteProduct = (req, res) => {
   const { id } = req.params;
 
-  db.query('DELETE FROM products WHERE id = ?', [id], (err, result) => {
+  db.query('UPDATE products SET isDeleted = 1 WHERE id = ?', [id], (err, result) => {
     if (err) throw err;
     res.json({ message: 'Product deleted successfully' });
   });
